@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <div class="overflow-hidden bg-gray-900 py-24 sm:py-32">
+        <div class="mx-auto max-w-7xl px-6 lg:px-8">
+            <div class="mx-auto grid max-w-2xl grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:mx-0 lg:max-w-none lg:grid-cols-2">
+                <div class="lg:pt-4 lg:pr-8">
+                    <div class="lg:max-w-lg">
+                        <h2 class="font-semibold text-indigo-400">Teste de HTML, TAILWIND E JAVASCRIPT</h2>
+                        <p class="mt-2 text-4xl font-semibold tracking-tight text-pretty text-white sm:text-5xl">Criado por Eric Brambila</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bg-gray-900 pb-7">
+        <div class="max-w-[700px] mx-auto bg-gray-300 rounded-2xl p-6">
+            <form id="meuForm">
+                <div class="grid grid-cols-2 gap-4">
+                    <label class="flex flex-col text-gray-900 font-semibold">
+                        Nome
+                        <input type="text" id="nomeInput"
+                            class="mt-2 bg-gray-900 rounded-2xl placeholder-white placeholder-opacity-75 px-3 py-2 text-white"
+                            placeholder="Insira seu nome">
+                    </label>
+
+                    <label class="flex flex-col text-gray-900 font-semibold">
+                        Email
+                        <input type="email" id="emailInput"
+                            class="mt-2 bg-gray-900 rounded-2xl placeholder-white placeholder-opacity-75 px-3 py-2 text-white"
+                            placeholder="Insira seu email">
+                    </label>
+
+                    <label class="flex flex-col text-gray-900 font-semibold">
+                        Senha
+                        <input type="password" id="senhaInput"
+                            class="mt-2 bg-gray-900 rounded-2xl placeholder-white placeholder-opacity-75 px-3 py-2 text-white"
+                            placeholder="Insira sua senha">
+                    </label>
+
+                    <div class="flex items-end">
+                        <button type="submit"
+                            class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition-colors w-full">
+                            Enviar
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Área para mostrar dados salvos -->
+            <div id="dadosSalvos" class="mt-6 p-4 bg-gray-800 rounded-lg hidden">
+                <h3 class="text-white font-semibold mb-2">Dados Salvos:</h3>
+                <div id="listaDados" class="text-gray-300"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Arrays para armazenar os dados
+        let nome = [];
+        let email = [];
+        let senha = [];
+
+        console.log("JavaScript carregou!");
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('meuForm');
+            
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+                
+                console.log("Formulário submetido!");
+                
+                const nomeValue = document.getElementById('nomeInput').value;
+                const emailValue = document.getElementById('emailInput').value;
+                const senhaValue = document.getElementById('senhaInput').value;
+                
+
+                nome.push(nomeValue);
+                email.push(emailValue);
+                senha.push(senhaValue);
+                
+                mostrarDados();
+                form.reset();
+                
+                alert('Dados salvos com sucesso!');
+            });
+        });
+
+        function mostrarDados() {
+            const dadosSalvos = document.getElementById('dadosSalvos');
+            const listaDados = document.getElementById('listaDados');
+            
+            let html = '';
+            for (let i = 0; i < nome.length; i++) {
+                html += `
+                    <div class="mb-2 p-2 bg-gray-700 rounded">
+                        <strong>Usuário ${i + 1}:</strong><br>
+                        Nome: ${nome[i]}<br>
+                        Email: ${email[i]}<br>
+                        Senha: ${'•'.repeat(senha[i].length)}
+                    </div>
+                `;
+            }
+            
+            listaDados.innerHTML = html;
+            dadosSalvos.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
